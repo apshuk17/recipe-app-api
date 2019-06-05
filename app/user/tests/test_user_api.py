@@ -94,8 +94,8 @@ class PublicUserApiTests(TestCase):
 
     def test_create_missing_field(self):
         '''Test that email and password are required'''
-        res = self.client.post(TOKEN_URL,
-            {'email': 'abc@gmail.com', 'password': ''})
+        payload = {'email': 'abc@gmail.com', 'password': ''}
+        res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
         self.assertEqual(status.HTTP_400_BAD_REQUEST, res.status_code)
